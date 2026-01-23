@@ -1,2 +1,3 @@
 {"text": "How do I return an item?", "label": "return_request"}
+{"text": "I need to reset my password", "label": "password_reset"}
 {"text": "My order is late", "label": "shipping_issue"}

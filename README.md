@@ -1,6 +1,6 @@
 # Text Annotation Pipeline — Proof of Concept (Quality Validator & Output Generator)
 
-This repository contains a **Proof of Concept (PoC)** for the *Quality Validator & Output Generator* that converts raw annotation outputs into a clean, ML-ready training dataset. It fits into a broader GCP architecture using **Dataflow (ingestion)**, **GCS (raw store)**, **Kafka (annotation jobs)**, **Vertex AI Data Labeling (human-in-the-loop)**, **PostgreSQL (annotation store)**, **BigQuery (curated dataset)**, and **Collibra (governance)**.
+This repo contains a **Proof of Concept (PoC)** for the *Quality Validator & Output Generator* that converts raw annotation outputs into a clean, ML ready training dataset. It fits into a broader GCP architecture using **Dataflow (ingestion)**, **GCS (raw store)**, **Kafka (annotation jobs)**, **Vertex AI Data Labeling (human-in-the-loop)**, **PostgreSQL (annotation store)**, **BigQuery (curated dataset)**, and **Collibra (governance)**.
 
 ---
 
@@ -30,7 +30,7 @@ The PoC performs the following steps:
 ## **Run the script**
 
 > **Prerequisites**:
-· Python 3.9+
+· Python 3.13.9
 · pandas
 
 ```bash
