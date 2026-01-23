@@ -5,10 +5,11 @@ Please see `architecture_diagram.md` for the data flow from ingestion to  BigQue
 
 ## 2. Components & Data Flow (High-Level)
 
-1. **Raw Text Ingestion Service (Dataflow)**
+1. **Raw Text Ingestion Service (GCP Dataflow)**
    · Sources: support tickets, chat logs, emails
-   · Ingests batch and streaming text (optional)
-   · Writes raw data to **GCS** for replay, backfill, audits and optionally publishes events to **Kafka Raw Text Topic** for real-time streaming 
+   · Ingests both batch and streaming text
+   · Stores raw data in **GCS** for replay, audits, and backfill
+   · Optionally publishes events to **Kafka Raw Text Topic** for real-time processing
 2. **Annotation Orchestrator & Queue**
    · Consumes raw events from GCS/Kafka
    · Creates annotation-ready tasks (sampling, filtering, shaping)
