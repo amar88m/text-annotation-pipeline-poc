@@ -20,7 +20,7 @@ Please see `architecture_diagram.md` for the data flow from ingestion to  BigQue
 4. **Annotation Store (OLTP DB)**
    · **PostgreSQL** with ACID guarantees and JSONB for flexible annotation metadata.
    · Stores: text, annotator_id, label, confidence_score, policy_version, timestamps.
-5. **Quality Validator & Output Generator**
+5. **Quality Validator & Output Generator (Core Logic)**
    · Loads annotations (CSV extract or PostgreSQL view)
    · Quality Check 1: Keep only annotations with `confidence_score` >= 0.8
    · Quality Check 2: After filtering, detect label disagreements and log them to `disagreements.log`

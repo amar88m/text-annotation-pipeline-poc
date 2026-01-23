@@ -7,6 +7,7 @@ OUT_JSONL = Path("clean_training_dataset.jsonl")
 OUT_LOG = Path("disagreements.log")
 CONF_THRESHOLD = 0.8
 
+# Load CSV and Filter by Confidence
 def load_and_filter(path: Path, threshold: float) -> pd.DataFrame:
     df = pd.read_csv(path)
     required = {"text", "annotator_id", "label", "confidence_score"}
@@ -16,23 +17,26 @@ def load_and_filter(path: Path, threshold: float) -> pd.DataFrame:
     df = df[df["confidence_score"] >= threshold].copy()
     return df
 
+# Identify Annotation Conflicts
 def find_disagreements(df: pd.DataFrame) -> set:
     counts = df.groupby("text")["label"].nunique()
     return set(counts[counts > 1].index)
 
+# Write Clean Dataset and Log Disagreements
 def write_outputs(df: pd.DataFrame, disagreed: set):
-    # disagreements.log
+    # This opens the log file `disagreements.log` for writing
     with OUT_LOG.open("w", encoding="utf-8") as f:
         for text in sorted(disagreed, key=lambda s: s.lower()):
             f.write(text + "\n")
-    # clean_training_dataset.jsonl
+    # Remove texts with disagreements to create a clean dataset
     clean = df[~df["text"].isin(disagreed)].copy()
-    # for each text, labels are identical, pick first deterministically
+    # For each text, all remaining labels are identical, so we pick the first one consistently
     final = (
         clean.sort_values(["text", "label"])
         .groupby(["text"], as_index=False)["label"].first()
         .sort_values("text", key=lambda s: s.str.lower())
     )
+    # Write the cleaned dataset to a JSONL file, one JSON object per line
     with OUT_JSONL.open("w", encoding="utf-8") as f:
         for _, row in final.iterrows():
             f.write(json.dumps({"text": row["text"], "label": row["label"]}, ensure_ascii=False) + "\n")
