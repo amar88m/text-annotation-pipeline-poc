@@ -1,0 +1,82 @@
+# Build output (recursive for all modules)
+target/
+**/build/
+**/out/
+
+# Temporary and runtime directories
+tmp/
+bin/
+
+# Logs
+#**/logs/
+#*.log
+#**/service_logs/
+#**/bdd/apilogs/
+
+# Documentation
+HELP.md
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Maven files
+# Maven Wrapper – keep wrapper in VCS (preferred: do NOT ignore .mvn or mvnw)
+dependency-reduced-pom.xml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+# Generated sources
+**/generated-sources/
+**/protobuf/generated/
+
+# Packages/archives – global, with exception for vendored libs
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+!lib/**/**/*.jar
+
+# Local Helm override files
+**/local-config.yaml
+
+# Helm chart artifacts
+charts/
+*.tgz
+
+# Kubernetes manifests
+deploy/*.yaml
+
+# Python virtual environments
+.venv/
+venv/
+env/
