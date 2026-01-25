@@ -65,8 +65,7 @@ Please see `architecture_diagram.md` for the data flow from ingestion to  BigQue
 ---
 
 ## **5.PoC Scope**
-· Read CSV input.
-· Apply confidence & agreement checks.
-· Write `clean_training_dataset.json`.
-· Write `disagreements.log`.
-· Optional load into BigQuery
+· Read CSV input
+· Apply confidence & agreement checks
+· Write `clean_training_dataset.json`
+· Write `disagreements.log`
