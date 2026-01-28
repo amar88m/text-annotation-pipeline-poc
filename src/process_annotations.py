@@ -7,7 +7,7 @@ from typing import Set
 
 
 # CONFIG
-INPUT = Path("src/raw_annotations.csv")
+INPUT = Path("raw_annotations.csv")
 OUT_JSONL = Path("clean_training_dataset.jsonl")
 OUT_LOG = Path("disagreements.log")
 CONF_THRESHOLD = 0.8
@@ -23,7 +23,6 @@ logger = logging.getLogger(__name__)
 
 # Load CSV and Filter by Confidence
 def load_and_filter(path: Path, threshold: float) -> pd.DataFrame:
-    """Load CSV and filter records by confidence score"""
     try:
         if not path.exists():
             raise FileNotFoundError(f"Input file not found: {path}")
@@ -62,7 +61,6 @@ def find_disagreements(df: pd.DataFrame) -> Set[str]:
 
 # Write Clean Dataset and Log Disagreements
 def write_outputs(df: pd.DataFrame, disagreed: Set[str]) -> None:
-    """Write disagreements log and clean JSONL dataset"""
     try:
         # This opens the log file `disagreements.log` for writing
         OUT_LOG.write_text(
@@ -73,7 +71,7 @@ def write_outputs(df: pd.DataFrame, disagreed: Set[str]) -> None:
         # Remove texts with disagreements to create a clean dataset
         clean = df.loc[~df["text"].isin(disagreed), ["text", "label"]]
 
-        # After removing disagreements, every remaining text has a single consistent label, 
+        # After removing disagreements, every remaining text has a single consistent label,
         # so we simply select one label per text
         final = (
             clean
@@ -113,7 +111,6 @@ def main() -> None:
     except Exception as e:
         logger.error("Pipeline failed: %s", e)
         raise
-
 
 if __name__ == "__main__":
     main()
